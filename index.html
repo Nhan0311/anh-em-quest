@@ -119,6 +119,8 @@ function auUnlock(){
   try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
   auInit();const c=AU.ctx;
   if(c&&c.state!=='running'){try{c.resume().then(auMark).catch(()=>{})}catch(e){}}
+  /* iOS 17+ đã có audioSession='playback'; phát thêm <audio> câm trên Safari sẽ ngắt (interrupted) AudioContext, nên chỉ dùng mẹo này cho máy cũ */
+  if(navigator.audioSession){if(c&&c.state==='running')auMark();return}
   if(!AU.el){try{const a=new Audio(silentWav());a.loop=true;a.setAttribute('playsinline','');const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{AU.el=null});AU.el=a}catch(e){}}
   else if(AU.el.paused){try{AU.el.play().catch(()=>{})}catch(e){}}
   if(c&&c.state==='running')auMark();
@@ -1258,7 +1260,7 @@ run(L){
 }});
 
 /* ====== KHỞI ĐỘNG ====== */
-['pointerdown','pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,()=>{if(AU.ctx&&AU.ctx.state==='running'&&AU.el&&!AU.el.paused)return;auUnlock()},{passive:true,capture:true}));setInterval(refreshMute,800);
+['pointerdown','pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,()=>{if(AU.ctx&&AU.ctx.state==='running'&&(navigator.audioSession||AU.el&&!AU.el.paused))return;auUnlock()},{passive:true,capture:true}));setInterval(refreshMute,800);
 setHud();
 (function boot(){
   const go=()=>{const m=/^#L(\d+)$/.exec(location.hash);if(m){startLevel(clamp(+m[1]-1,0,TOTAL-1))}else showTitle()};
