@@ -85,16 +85,7 @@ canvas.cv{image-rendering:pixelated;image-rendering:crisp-edges;touch-action:non
 <script>
 'use strict';
 /* ====== CẤU HÌNH (anh sửa ở đây) ====== */
-const CFG={
-  code:'HB3YR',
-  date:'25.10.2026',
-  letter:[
-    'Ba năm rồi.',
-    'Em từng viết: "hi vọng bất kể tương lai như thế nào, em cũng có anh đồng hành bên cạnh."',
-    'Điều ước đó, anh xin nhận. Và anh xin ước lại y như vậy.',
-    'Tối kỷ niệm, mình ăn tối nhé. Nhắn mã cho anh, anh sẽ nói chỗ hẹn.'
-  ]
-};
+const CFG=(()=>{const k='q7#Lm!zR9pK@w2',b=atob('ChVAIwlEWGgZUgMCRGsjFQ9sT0UbJlxScWBVAEQZEnxDE0pgD1JnYFVeFENXKR8DQHJiUgkhV1y1tE5sH8DBwVBeaWxXEDRaAziMmtE8XlA9KZaIzkMZbDEDEjsZBqr7+lwWF0Gt14QOclKR8MNXRreH5e0DRlo+WBlrLh/0wRdXJIybxXJXs+svWxIUWgMvqIgUNRkTiPNXUx9fA4j8wMHBVxdrKLSSH18DLq6LFHJakfHhGVpfawFuQQFYlqkZqvv2R1Hxk63Wuhly/eGI81sSEFlLbBVIFHJXGKr62lxfF3WPzQEbPFFQMykZEreHwvf2Qlo+2MrqKVdLUVlLit0BDLOD3TJuVR5RFXet1rATclKR8PdXXBjWmMsADVo/+twlKFf28lkDOIya6zsZHiOD3hxReUut144UclSz6GAUWh4XQiIFDVozVxhrM5aIzBdNj95IWjFRkfDXV1qQjZoiQwMnLw=='),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i)^k.charCodeAt(i%k.length);return JSON.parse(new TextDecoder().decode(u))})();
 const TOTAL=18;
 const $=s=>document.querySelector(s);
 const game=$('#game'),play=$('#play'),msgEl=$('#msg'),fx=$('#fx'),fxg=fx.getContext('2d');
